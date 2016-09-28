@@ -1,11 +1,15 @@
 {
   "name": "bplayer-vhs",
-  "version": "1.0.0",
-  "description": "Wrapper for Bloomberg video player",
+  "version": "0.0.8",
+  "description": "Wrapper for Bloomberg video player (HTML5 version)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+  	"type": "git",
+  	"url": "git://github.com/bizweekgraphics/bplayer-vhs-module.git"
+  },
+  "author": "James Pants <jamespants@gmail.com>",
   "license": "ISC"
 }

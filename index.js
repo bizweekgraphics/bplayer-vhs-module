@@ -15,7 +15,6 @@
 var VHS = function(params){
 
 	this.id = params.videoId || null;
-	this.htmlChildId = params.htmlChildId || null;
 	this.domId = document.getElementById(params.domId) || null;
 	this.autoplay = params.autoplay || false;
 	this.player = null;
@@ -28,7 +27,7 @@ var VHS = function(params){
 	//--------------------------------------------
 	// Binding
 	//
-	this.start = this.start.bind(this);
+	this.initializePlayer = this.initializePlayer.bind(this);
 			
 
 	this.init();
@@ -61,7 +60,10 @@ VHS.prototype = {
 		this.addOptions();
 
 		//add projector script, with start method as callback
-		this.addScript(this.start);
+		this.addScript();
+
+
+		window.addEventListener('BPlayerLoaded', this.initializePlayer);
 
 	},
 
@@ -79,15 +81,6 @@ VHS.prototype = {
 				
 		if (!this.id){
 			console.warn('🐍 It seems you have not provided a video ID to VHS. Please specify ID.');
-			return null;
-		}
-
-
-		//--------------------------------------------
-		// Make sure html child is present
-		//
-		if (!this.htmlChildId){
-			console.warn('🐙 It seems you have not provided an HTML child node to VHS. Please specifiy htmlChildId.');
 			return null;
 		}
 
@@ -134,11 +127,9 @@ VHS.prototype = {
 			use_share_overlay: true,
 			use_js_ads: true,
 			id: this.id,
-			htmlChildId: this.htmlChildId,
+			htmlChildId: 'bbg-video-player-' + this.domId,
 			idType: 'BMMR',
 			serverUrl: 'https://www.bloomberg.com/api/embed',
-			width: 640,
-			height: 360,
 			//HTML5 first...
 			techOrder:['html5', 'flash'],
 			log_debug: false,
@@ -171,7 +162,7 @@ VHS.prototype = {
 			offsite_embed: false,    
 			ad_tag_midroll: '',
 			ad_tag_cust_params_preroll: '',
-			autoplay: false
+			autoplay: this.autoplay
 		};
 	},
 
@@ -179,7 +170,7 @@ VHS.prototype = {
 	//--------------------------------------------
 	// Add script
 	//
-	addScript(callback){
+	addScript: function(callback){
 		var self = this;
 		var ready = false;
 		var tag = document.createElement('script');
@@ -191,7 +182,7 @@ VHS.prototype = {
 
 			if (!ready && (!this.readyState || this.readyState === 'complete')){
 				ready = true;
-				callback();
+				self.scriptLoaded = true;
 			}
 		}
 
@@ -199,24 +190,29 @@ VHS.prototype = {
 	},
 
 
-	start(){
+	//--------------------------------------------
+	//
+	// Initialize player
+	//
+	//--------------------------------------------
+
+	initializePlayer: function(event){
+
 		var self = this;
 
-		console.log('this', this)
+		this.playerVersion = event.detail.version;
+		
+		var bplayer = event.detail.bplayer;
 
-		BPlayer.create(this.domId, this.options, {
+		bplayer.create(this.domId, this.options, {
 			onReady: function(){
 				self.player = this;
-
-				if (self.autoplay){
-					self.player.play();
-				}
-
 			},
+
 			onError: function(err){
 				console.error(err);
 			}
-		})
+		});
 	}
 			
 }
