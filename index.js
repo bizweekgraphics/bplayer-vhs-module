@@ -23,7 +23,7 @@
 			this.domId = document.getElementById(params.domId) || null;
 			this.autoplay = params.autoplay || false;
 			this.player = null;
-
+			this.loaded = true;
 			this.options = {};
 			this.callbacks = {};
 			this.src = 'https://cdn.gotraffic.net/projector/latest/bplayer.js';
@@ -65,14 +65,15 @@
 				this.addOptions();
 
 				//add projector script, with start method as callback
-				if (!window.BPlayer){
+				if (window.BPlayer){
+					console.log('already init');
+					this.initializePlayer({bplayer: window.BPlayer});
+				}
+
+				else{
+					window.addEventListener('BPlayerLoaded', this.onLoad.bind(this));
 					this.addScript(this.initializePlayer);
 				}
-				
-
-
-				window.addEventListener('BPlayerLoaded', this.onLoad.bind(this));
-
 			},
 
 
@@ -204,6 +205,12 @@
 
 			onLoad: function(event){
 				this.playerVersion = event.detail.version;
+				this.loaded = true;
+
+				if (window.BPlayer){
+					return null;
+				}
+
 			},
 
 
@@ -217,8 +224,7 @@
 
 				var self = this;
 
-
-				BPlayer.create(this.domId, this.options, {
+				window.BPlayer.create(this.domId, this.options, {
 					onReady: function(){
 						self.player = this;
 					},
