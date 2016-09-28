@@ -65,10 +65,13 @@
 				this.addOptions();
 
 				//add projector script, with start method as callback
-				this.addScript();
+				if (!window.BPlayer){
+					this.addScript(this.initializePlayer);
+				}
+				
 
 
-				window.addEventListener('BPlayerLoaded', this.initializePlayer);
+				window.addEventListener('BPlayerLoaded', this.onLoad.bind(this));
 
 			},
 
@@ -188,10 +191,19 @@
 					if (!ready && (!this.readyState || this.readyState === 'complete')){
 						ready = true;
 						self.scriptLoaded = true;
+
+						if (callback){
+							callback();
+						}
 					}
 				}
 
 				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			},
+
+
+			onLoad: function(event){
+				this.playerVersion = event.detail.version;
 			},
 
 
@@ -205,11 +217,8 @@
 
 				var self = this;
 
-				this.playerVersion = event.detail.version;
-				
-				var bplayer = event.detail.bplayer;
 
-				bplayer.create(this.domId, this.options, {
+				BPlayer.create(this.domId, this.options, {
 					onReady: function(){
 						self.player = this;
 					},
