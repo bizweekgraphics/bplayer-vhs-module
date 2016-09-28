@@ -22,6 +22,7 @@
 			this.id = params.videoId || null;
 			this.domId = document.getElementById(params.domId) || null;
 			this.autoplay = params.autoplay || false;
+			this.playOnTerminal = params.playOnTerminal || false;
 			this.player = null;
 			this.loaded = true;
 			this.options = {};
@@ -64,16 +65,22 @@
 				//Add bplayer defaults + required params
 				this.addOptions();
 
-				//add projector script, with start method as callback
-				if (window.BPlayer){
-					console.log('already init');
-					this.initializePlayer({bplayer: window.BPlayer});
+
+				if (window.isTerminal){
+
+					if (this.playOnTerminal){
+						this.start();
+					}
+
+					else{
+						return null;
+					}
 				}
 
 				else{
-					window.addEventListener('BPlayerLoaded', this.onLoad.bind(this));
-					this.addScript(this.initializePlayer);
+					this.start();
 				}
+
 			},
 
 
@@ -112,6 +119,14 @@
 
 				else{
 					this.autoplay = false;
+				}
+
+				if (this.playOnTerminal === 'true' || this.playOnTerminal === true){
+					this.playOnTerminal = true;
+				}
+
+				else{
+					this.playOnTerminal = false;
 				}
 			},
 
@@ -200,6 +215,26 @@
 				}
 
 				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			},
+
+
+			//--------------------------------------------
+			// Startup
+			//
+					
+			start: function(){
+
+
+				//add projector script, with start method as callback
+				if (window.BPlayer){
+					console.log('already init');
+					this.initializePlayer({bplayer: window.BPlayer});
+				}
+
+				else{
+					window.addEventListener('BPlayerLoaded', this.onLoad.bind(this));
+					this.addScript(this.initializePlayer);
+				}
 			},
 
 
