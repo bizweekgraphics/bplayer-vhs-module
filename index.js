@@ -18,11 +18,18 @@ var VHS = function(params){
 	this.htmlChildId = params.htmlChildId || null;
 	this.domId = document.getElementById(params.domId) || null;
 	this.autoplay = params.autoplay || false;
-	
+	this.player = null;
 
 	this.options = {};
 	this.callbacks = {};
 	this.src = 'https://cdn.gotraffic.net/projector/latest/bplayer.js';
+
+
+	//--------------------------------------------
+	// Binding
+	//
+	this.start = this.start.bind(this);
+			
 
 	this.init();
 };
@@ -194,10 +201,16 @@ VHS.prototype = {
 
 	start(){
 		var self = this;
-		
+
+		console.log('this', this)
+
 		BPlayer.create(this.domId, this.options, {
 			onReady: function(){
-				console.log('ready', this);
+				self.player = this;
+
+				if (self.autoplay){
+					self.player.play();
+				}
 
 			},
 			onError: function(err){
@@ -207,3 +220,6 @@ VHS.prototype = {
 	}
 			
 }
+
+
+module.exports = VHS;
