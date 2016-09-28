@@ -34,13 +34,14 @@ const v = new VHS({
 });
 ```
 
-- The above configuration will leave the player in it's default state. Below, we are specifiying a player with autoplay (defaults to false)
+- The above configuration will leave the player in it's default state. Below, we are specifiying a player with autoplay (defaults to false) and which will play on terminal (also defaults to false)
 
 ```js
 const v = new VHS({
 	domId: 'top-video',
 	videoId: 'OD0g_99_xxxxxxxx',
-	autoplay: true
+	autoplay: true,
+	playOnTerminal: true
 });
 ```
 
