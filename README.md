@@ -10,6 +10,12 @@ Simple wrapper to make working with bloomberg bplayer a bit easier.
 npm install --save bplayer-vhs
 ```
 
+- Add it as a dependency in your app
+
+```js
+import VHS from 'bplayer-vhs'
+```
+
 - Then make sure you have a DIV in your body with an ID where you want the video to inject to.
 
 ```html
