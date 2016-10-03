@@ -20,7 +20,8 @@
 		var VHS = function(params){
 
 			this.id = params.videoId || null;
-			this.domId = document.getElementById(params.domId) || null;
+			this.domId = params.domId || null;
+			this.domEl = document.getElementById(params.domId) || null;
 			this.autoplay = params.autoplay || false;
 			this.playOnTerminal = params.playOnTerminal || false;
 			this.player = null;
@@ -259,7 +260,7 @@
 
 				var self = this;
 
-				window.BPlayer.create(this.domId, this.options, {
+				window.BPlayer.create(this.domEl, this.options, {
 					onReady: function(){
 						self.player = this;
 					},
