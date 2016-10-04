@@ -154,7 +154,7 @@
 					id: this.id,
 					htmlChildId: 'bbg-video-player-' + this.domId,
 					idType: 'BMMR',
-					serverUrl: 'https://www.bloomberg.com/api/embed',
+					serverUrl: '//www.bloomberg.com/api/embed',
 					//HTML5 first...
 					techOrder:['html5', 'flash'],
 					log_debug: false,
