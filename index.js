@@ -28,7 +28,7 @@
 			this.loaded = true;
 			this.options = {};
 			this.callbacks = {};
-			this.src = 'https://cdn.gotraffic.net/projector/latest/bplayer.js';
+			this.src = '//cdn.gotraffic.net/projector/latest/bplayer.js';
 
 
 			//--------------------------------------------
