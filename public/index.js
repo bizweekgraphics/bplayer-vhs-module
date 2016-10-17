@@ -184,7 +184,6 @@
 					ads_max_retries_preroll: 3,
 					ads_max_retries_midroll: 3,
 					vertical: 'business',  
-					ad_tag_overlay: 'business/videooverlay', 
 					use_parsely: true, 'source': 'BBIZweb', 
 					module_conviva_insights: 'enabled', 
 					conviva_account: 'c3.Bloomberg', 
