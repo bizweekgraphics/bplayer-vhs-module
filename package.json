@@ -1,6 +1,6 @@
 {
   "name": "bplayer-vhs",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Wrapper for Bloomberg video player (HTML5 version)",
   "main": "index.js",
   "scripts": {
