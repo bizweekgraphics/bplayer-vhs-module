@@ -19,7 +19,8 @@
 
 			this.id = params.videoId || null;
 			this.domId = params.domId || null;
-			
+
+			this.live = params.live || null;
 			this.domEl = document.getElementById(params.domId) || null;
 			this.autoplay = params.autoplay || false;
 			this.playOnTerminal = params.playOnTerminal || false;
@@ -157,6 +158,7 @@
 					conviva_account: 'c3.Bloomberg',
 					use_share_overlay: true,
 					use_js_ads: true,
+					live: this.live,
 					id: this.id,
 					htmlChildId: 'bbg-video-player-' + this.domId,
 					idType: 'BMMR',
