@@ -4,12 +4,17 @@
   "description": "Wrapper for Bloomberg video player (HTML5 version)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/server"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/bizweekgraphics/bplayer-vhs-module.git"
   },
   "author": "James Pants <jamespants@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "connect": "^3.5.0",
+    "open": "0.0.5",
+    "serve-static": "^1.11.1"
+  }
 }

@@ -178,7 +178,7 @@
 					ads_vast_timeout: 10000,
 					ads_playback_timeout: 10000,
 					wmode: 'opaque',
-					comscore_ns_site: 'bloomberg-stream',
+					comscore_ns_site: 'bloomberg',
 					comscore_page_level_tags: {}, 
 					ads_max_retries_preroll: 3,
 					ads_max_retries_midroll: 3,
