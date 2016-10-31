@@ -19,7 +19,8 @@
 
 			this.id = params.videoId || null;
 			this.domId = params.domId || null;
-			
+
+			this.live = params.live || null;
 			this.domEl = document.getElementById(params.domId) || null;
 			this.autoplay = params.autoplay || false;
 			this.playOnTerminal = params.playOnTerminal || false;
@@ -157,6 +158,7 @@
 					conviva_account: 'c3.Bloomberg',
 					use_share_overlay: true,
 					use_js_ads: true,
+					live: this.live,
 					id: this.id,
 					htmlChildId: 'bbg-video-player-' + this.domId,
 					idType: 'BMMR',
@@ -173,7 +175,6 @@
 					ad_network_id_preroll: '5262',
 					ad_network_id_midroll: '5262',
 					ad_network_id_overlay: '5262',
-					ad_tag_overlay: 'business/videooverlay',
 					ads_vast_timeout: 10000,
 					ads_playback_timeout: 10000,
 					wmode: 'opaque',
@@ -181,7 +182,8 @@
 					comscore_page_level_tags: {}, 
 					ads_max_retries_preroll: 3,
 					ads_max_retries_midroll: 3,
-					vertical: 'business',  
+					vertical: 'business',
+					ad_tag_overlay: 'business/videooverlay', 
 					use_parsely: true, 'source': 'BBIZweb', 
 					module_conviva_insights: 'enabled', 
 					conviva_account: 'c3.Bloomberg', 
