@@ -45,6 +45,15 @@ const v = new VHS({
 });
 ```
 
+- For livestreams: (options for `videoId` are US, ASIA, EU, EVENT, EMEA_EVENT, or ASIA_EVENT)
+
+```js
+const v = new VHS({
+    domId: 'top-video',
+    videoId: 'US',
+    live: true
+});
+```
 
 - You also have access to all BPlayer methods such as play/pause/etc
 
