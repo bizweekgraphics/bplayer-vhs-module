@@ -33,12 +33,22 @@
 			this.options = {};
 			this.src = '//cdn.gotraffic.net/projector/latest/bplayer.js';
 
+			
+
 
 			//--------------------------------------------
 			// Binding
 			//
 			this.initializePlayer = this.initializePlayer.bind(this);
 					
+
+			
+
+			//--------------------------------------------
+			// Instance used for testing
+			//
+					
+			this._instance = this
 
 			this.init();
 		};
@@ -86,6 +96,21 @@
 				}
 
 			},
+
+
+			//--------------------------------------------
+			// Returns singleton instance
+			//
+			get: function(params){
+				if (VHS._instance){
+					return VHS._instance
+				}
+
+				VHS._instance = new VHS(params)
+
+				return VHS._instance
+			},
+					
 
 
 			//--------------------------------------------
