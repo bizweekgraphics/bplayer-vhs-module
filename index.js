@@ -28,6 +28,7 @@
 			this.ad_tag_overlay = params.ad_tag_overlay || 'business/videooverlay';
 			this.ad_tag_cust_params_preroll = params.ad_tag_cust_params_preroll || '';
 			this.ad_tag_cust_params_midroll = params.ad_tag_cust_params_midroll || '';
+			this.techOrder = params.techOrder || ['html5', 'flash'];
 
 			this.playOnTerminal = params.playOnTerminal || false;
 			this.onReady = params.onReady || null;
@@ -170,7 +171,7 @@
 					idType: 'BMMR',
 					serverUrl: '//www.bloomberg.com/api/embed',
 					//HTML5 first...
-					techOrder:['html5', 'flash'],
+					techOrder: this.techOrder,
 					log_debug: false,
 					ui_controls_popout: false,
 					ad_tag_gpt_preroll: true,
