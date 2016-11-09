@@ -23,6 +23,12 @@
 			this.live = params.live || null;
 			this.domEl = document.getElementById(params.domId) || null;
 			this.autoplay = params.autoplay || false;
+			this.ad_tag = params.ad_tag || '';
+			this.ad_tag_midroll = params.ad_tag_midroll || '';
+			this.ad_tag_overlay = params.ad_tag_overlay || 'business/videooverlay';
+			this.ad_tag_cust_params_preroll = params.ad_tag_cust_params_preroll || '';
+			this.ad_tag_cust_params_midroll = params.ad_tag_cust_params_midroll || '';
+
 			this.playOnTerminal = params.playOnTerminal || false;
 			this.onReady = params.onReady || null;
 			// this.onPlay = params.onPlay || null;
@@ -38,7 +44,7 @@
 			// Binding
 			//
 			this.initializePlayer = this.initializePlayer.bind(this);
-					
+
 
 			this.init();
 		};
@@ -51,7 +57,7 @@
 		// VHS class
 		//
 		//--------------------------------------------
-				
+
 		VHS.prototype = {
 
 			//--------------------------------------------
@@ -93,12 +99,12 @@
 			// Make sure all required params are in
 			//
 			//--------------------------------------------
-					
+
 			checkRequirements: function(){
 				//--------------------------------------------
 				// Make sure user has entered ID
 				//
-						
+
 				if (!this.id){
 					console.warn('🐍 It seems you have not provided a video ID to VHS. Please specify ID.');
 					return null;
@@ -116,7 +122,7 @@
 				//--------------------------------------------
 				// Check to make sure if autoplay is passed in, it is in right type
 				//
-						
+
 				if (this.autoplay === 'true' || this.autoplay === true){
 					this.autoplay = true;
 				}
@@ -128,7 +134,7 @@
 				//--------------------------------------------
 				// Same for play on terminal
 				//
-						
+
 				if (this.playOnTerminal === 'true' || this.playOnTerminal === true){
 					this.playOnTerminal = true;
 				}
@@ -145,7 +151,7 @@
 			// Setup bplayer defaults + user params
 			//
 			//--------------------------------------------
-					
+
 			addOptions: function(){
 				var self = this;
 
@@ -179,20 +185,20 @@
 					ads_playback_timeout: 10000,
 					wmode: 'opaque',
 					comscore_ns_site: 'bloomberg',
-					comscore_page_level_tags: {}, 
+					comscore_page_level_tags: {},
 					ads_max_retries_preroll: 3,
 					ads_max_retries_midroll: 3,
 					vertical: 'business',
-					ad_tag_overlay: 'business/videooverlay', 
-					use_parsely: true, 'source': 'BBIZweb', 
-					module_conviva_insights: 'enabled', 
-					conviva_account: 'c3.Bloomberg', 
-					zone: 'video', 'ad_tag_cust_params_preroll': '',
-					ad_tag: '',
-					ad_tag_midroll: '',
-					offsite_embed: false,    
-					ad_tag_midroll: '',
-					ad_tag_cust_params_preroll: '',
+					ad_tag_overlay: this.ad_tag_overlay,
+					use_parsely: true, 'source': 'BBIZweb',
+					module_conviva_insights: 'enabled',
+					conviva_account: 'c3.Bloomberg',
+					zone: 'video',
+					ad_tag: this.ad_tag,
+					ad_tag_midroll: this.ad_tag_midroll,
+					offsite_embed: false,
+					ad_tag_cust_params_preroll: this.ad_tag_cust_params_preroll,
+					ad_tag_cust_params_midroll: this.ad_tag_cust_params_midroll,
 					autoplay: this.autoplay
 				};
 			},
@@ -208,7 +214,7 @@
 				var firstScriptTag = document.getElementsByTagName('script')[0];
 				tag.src = this.src;
 
-				
+
 				tag.onload = tag.onreadystatechange = function(){
 
 					if (!ready && (!this.readyState || this.readyState === 'complete')){
@@ -228,7 +234,7 @@
 			//--------------------------------------------
 			// Startup
 			//
-					
+
 			start: function(){
 
 
@@ -290,7 +296,7 @@
 	//--------------------------------------------
 	// Export to common.js or window, depending
 	//
-			
+
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined'){
 		module.exports = VHS;
 	}
@@ -300,5 +306,5 @@
 	}
 
 })();
-		
+
 
